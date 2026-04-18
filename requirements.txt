@@ -1,0 +1,18 @@
+langchain
+flask
+sentence-transformers
+pypdf
+python-dotenv
+langchain-pinecone>=0.2.0
+langchain-huggingface
+text-generation 
+transformers 
+google-search-results 
+numexpr 
+langchainhub 
+sentencepiece 
+jinja2 
+bitsandbytes 
+accelerate
+langchain-community
+-e .
