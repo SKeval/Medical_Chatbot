@@ -2,8 +2,8 @@ from flask import Flask, render_template, jsonify, request
 from src.helper import download_embeddings
 from langchain_pinecone import PineconeVectorStore
 from langchain_classic.chains.combine_documents import create_stuff_documents_chain
-from langchain_classic.chains import create_retrieval_chain
-from langchain_core.prompts import ChatPromptTemplate
+from langchain_classic.chains import create_retrieval_chain,create_history_aware_retriever
+from langchain_core.prompts import ChatPromptTemplate, MessagesPlaceholder
 from dotenv import load_dotenv
 from src.prompt import *
 from langchain_google_genai import ChatGoogleGenerativeAI
@@ -45,15 +45,32 @@ chatmodel = ChatGoogleGenerativeAI(
     max_retries=2,
 
 )
+
+#Prompt to rephrase follow-up questions using history
+condense_prompt = ChatPromptTemplate.from_messages([
+    ("system", condense_prompt),
+    MessagesPlaceholder("chat_history"),
+    ("human", "{input}")
+])
+
+#History-aware retriever (rewrites question before searching)
+history_aware_retriever = create_history_aware_retriever(
+    chatmodel,
+    retriver,
+    condense_prompt
+)
+
 prompt = ChatPromptTemplate.from_messages(
     [
         ("system", system_prompt),
+        MessagesPlaceholder("chat_history"),
         ("human", "{input}")
     ]
 )
 
+#Prompt for answering using retrieved docs 
 question_answer_chain = create_stuff_documents_chain(chatmodel, prompt)
-rag_chain = create_retrieval_chain(retriver, question_answer_chain)
+rag_chain = create_retrieval_chain(history_aware_retriever, question_answer_chain)
 
 # Store for all sessions
 store = {}
@@ -67,7 +84,8 @@ chain_with_memory = RunnableWithMessageHistory(
     rag_chain,
     get_session_history,
     input_messages_key="input",
-    history_messages_key="chat_history"
+    history_messages_key="chat_history",
+    output_messages_key="answer"
 )
 
 
@@ -81,7 +99,6 @@ def index():
 @app.route("/get", methods=["GET", "POST"])
 def chat():
     msg = request.form["msg"]
-    input = msg
     print(input)
     response = chain_with_memory.invoke({"input": msg}, config={"configurable": {"session_id": "user_1"}})
     print("Response : ", response["answer"])
