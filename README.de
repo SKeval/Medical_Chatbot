@@ -2,7 +2,8 @@
 
 > A production-grade conversational AI for medical knowledge retrieval, built with **LangChain**, **Pinecone**, **Google Gemini**, **Flask**, and deployed on **AWS** via Docker.
 
-![Python](https://img.shields.io/badge/Python-3.10+-blue?style=flat-square&logo=python)
+[![Python 3.9+](https://img.shields.io/badge/Python-3.9%2B-blue)](https://www.python.org/)
+[![Python](https://img.shields.io/badge/Python-3.10+-blue?style=flat-square&logo=python)]
 ![LangChain](https://img.shields.io/badge/LangChain-RAG-green?style=flat-square)
 ![Pinecone](https://img.shields.io/badge/Pinecone-VectorDB-purple?style=flat-square)
 ![Gemini](https://img.shields.io/badge/Google-Gemini-orange?style=flat-square&logo=google)
