@@ -23,13 +23,13 @@ Unlike simple FAQ bots, this system supports **multi-turn conversations** with f
 
 ## ✨ Key Features
 
-- 🔍 **RAG Pipeline** — PDF ingestion → chunking → embedding → Pinecone vector search → Gemini generation
-- 🧠 **Conversation Memory** — `InMemoryChatMessageHistory` preserves session context across turns
-- 🔄 **History-Aware Retrieval** — LangChain rephrases follow-up questions before semantic search
-- ⚡ **Gemini LLM** — Powered by `gemini-3-flash-preview` for fast, high-quality medical responses
-- 📦 **Pinecone Serverless** — 384-dim cosine-similarity index on AWS `us-east-1`
-- 🌐 **Flask REST API** — Lightweight web interface with real-time chat UI
-- 🐳 **Docker + CI/CD** — Containerized and auto-deployed to AWS via GitHub Actions
+- 🔍 **RAG Pipeline** - PDF ingestion → chunking → embedding → Pinecone vector search → Gemini generation
+- 🧠 **Conversation Memory** - `InMemoryChatMessageHistory` preserves session context across turns
+- 🔄 **History-Aware Retrieval** - LangChain rephrases follow-up questions before semantic search
+- ⚡ **Gemini LLM** - Powered by `gemini-3-flash-preview` for fast, high-quality medical responses
+- 📦 **Pinecone Serverless** - 384-dim cosine-similarity index on AWS `us-east-1`
+- 🌐 **Flask REST API** - Lightweight web interface with real-time chat UI
+- 🐳 **Docker + CI/CD** - Containerized and auto-deployed to AWS via GitHub Actions
 
 ---
 
