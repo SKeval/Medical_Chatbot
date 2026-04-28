@@ -13,6 +13,6 @@ touch .env
 touch app.py
 touch research/trials.ipynb
 touch requirements.txt
-touch README.de
+touch README.md
 
 echo "Directory and files are created successfully..!"
